@@ -42,19 +42,37 @@ void UTankAimingComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 }
 
 
-void UTankAimingComponent::AimAt(const FVector& HitLocation, float LaunchSpeed) const
+void UTankAimingComponent::AimAt(const FVector& HitLocation, float LaunchSpeed)
 {
-	
+	// Protect Barrel Pointer
+	if ( ! Barrel) { return; }	
 
-	// See if we have a valid barrel and print it's location if we do
-	if (Barrel)
+	FVector OutLaunchVelocity;
+	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+
+
+	// Calculate the OutLaunchVelocity
+
+	if (UGameplayStatics::SuggestProjectileVelocity(
+		this,
+		OutLaunchVelocity,
+		StartLocation,
+		HitLocation,
+		LaunchSpeed, 
+		false, 0.0f, 0.0f,
+		ESuggestProjVelocityTraceOption::DoNotTrace,
+		FCollisionResponseParams::DefaultResponseParam,
+		TArray<AActor*>(), false)
+		)
 	{
-		// UE_LOG(LogTemp, Warning, 
-		// 	TEXT("TankAimingComponent on Tank %s got a Barrel at: %s, aiming at %s"),
-		// 	*GetOwner()->GetName(), 
-		// 	*Barrel->GetComponentLocation().ToString(),
-		// 	*HitLocation.ToString());
-		UE_LOG(LogTemp, Warning, TEXT("Firing Speed: %f"), LaunchSpeed);
+
+
+		// Create unit AimDirection
+		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
+		UE_LOG(LogTemp, Warning, TEXT("%s targetting : %s"), *GetOwner()->GetName(), *AimDirection.ToString()); 
+
 	}
+
+	// If no solution found, do nothing
 }
 
