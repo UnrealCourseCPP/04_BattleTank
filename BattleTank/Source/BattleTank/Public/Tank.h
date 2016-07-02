@@ -34,6 +34,9 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
-	
+	// TODO(spiros): Find sensible default
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float LaunchSpeed =  1000.f * 100.f;	// cm/sec
+
 	
 };
