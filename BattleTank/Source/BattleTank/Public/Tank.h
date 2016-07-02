@@ -3,7 +3,9 @@
 #pragma once
 
 #include "GameFramework/Pawn.h"
-#include "Tank.generated.h"
+#include "TankAimingComponent.h"
+
+#include "Tank.generated.h" // Must be the last include
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -13,6 +15,8 @@ class BATTLETANK_API ATank : public APawn
 public:
 	void AimAt(FVector HitLocation);
 
+protected:
+	UTankAimingComponent* TankAimingComponent = nullptr;
 
 private:
 	// Sets default values for this pawn's properties
