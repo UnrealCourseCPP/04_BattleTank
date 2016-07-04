@@ -29,6 +29,8 @@ void UTankAimingComponent::AimAt(const FVector& HitLocation, float LaunchSpeed)
 	// Protect Barrel Pointer
 	if ( ! Barrel) { return; }	
 
+
+
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 
@@ -57,9 +59,6 @@ void UTankAimingComponent::AimAt(const FVector& HitLocation, float LaunchSpeed)
 		
 		// Create unit AimDirection
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
-			
-
-
 
 		MoveBarrelTowards(AimDirection);
 	}
