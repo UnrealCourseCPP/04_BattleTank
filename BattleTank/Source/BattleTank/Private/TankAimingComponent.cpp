@@ -54,7 +54,7 @@ void UTankAimingComponent::AimAt(const FVector& HitLocation, float LaunchSpeed)
 
 	if ( bHaveAimSolution )
 	{
-		UE_LOG(LogTemp, Warning, TEXT("%f: Aim Solution found"), Time);
+		//UE_LOG(LogTemp, Warning, TEXT("%f: Aim Solution found"), Time);
 		
 		
 		// Create unit AimDirection
@@ -78,8 +78,8 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
 
-	//UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *AimAsRotator.ToString());
+	UE_LOG(LogTemp, Warning, TEXT("DeltaRotator: %f"), DeltaRotator.Pitch);
 
-	Barrel->Elevate(5);	// TODO remove magic number
+	Barrel->Elevate(DeltaRotator.Pitch);	
 }
 
