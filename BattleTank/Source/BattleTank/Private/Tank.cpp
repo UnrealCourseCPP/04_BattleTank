@@ -57,3 +57,8 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet)
 	}
 }
 
+void ATank::Fire()
+{
+	UE_LOG(LogTemp, Warning, TEXT("%f: Tank firing!"), GetWorld()->GetTimeSeconds());
+}
+

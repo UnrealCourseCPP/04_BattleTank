@@ -62,17 +62,10 @@ void UTankAimingComponent::AimAt(const FVector& HitLocation, float LaunchSpeed)
 
 	if ( bHaveAimSolution )
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("%f: Aim Solution found"), Time);
-		
-		
 		// Create unit AimDirection
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
 
 		MoveWeaponTowards(AimDirection);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%f: No aim solve found"), Time);
 	}
 
 	// If no solution found, do nothing
@@ -85,8 +78,6 @@ void UTankAimingComponent::MoveWeaponTowards(FVector AimDirection)
 	FRotator AimAsRotator = AimDirection.Rotation();
 
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
-
-	//UE_LOG(LogTemp, Warning, TEXT("DeltaRotator: %f"), DeltaRotator.Pitch);
 
 	Barrel->Elevate(DeltaRotator.Pitch);	
 	Turret->Rotate(DeltaRotator.Yaw);
