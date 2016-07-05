@@ -2,6 +2,7 @@
 
 #include "BattleTank.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 #include "TankAimingComponent.h"
 #include "Tank.h"
 
@@ -45,6 +46,14 @@ void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 	if (TankAimingComponent)
 	{
 		TankAimingComponent->SetBarrelReference(BarrelToSet);
+	}
+}
+
+void ATank::SetTurretReference(UTankTurret* TurretToSet)
+{
+	if (TankAimingComponent)
+	{
+		TankAimingComponent->SetTurretReference(TurretToSet);
 	}
 }
 

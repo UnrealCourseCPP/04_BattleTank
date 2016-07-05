@@ -2,6 +2,7 @@
 
 #include "BattleTank.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 #include "TankAimingComponent.h"
 
 
@@ -23,11 +24,16 @@ void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 	Barrel = BarrelToSet;
 }
 
+// Turret reference Setter
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+{
+	Turret = TurretToSet;
+}
 
 void UTankAimingComponent::AimAt(const FVector& HitLocation, float LaunchSpeed)
 {
-	// Protect Barrel Pointer
-	if ( ! Barrel) { return; }	
+	// Protect Barrel & Turret Pointers
+	if ( ! Barrel || ! Turret) { return; }	
 
 
 
@@ -60,7 +66,7 @@ void UTankAimingComponent::AimAt(const FVector& HitLocation, float LaunchSpeed)
 		// Create unit AimDirection
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
 
-		MoveBarrelTowards(AimDirection);
+		MoveWeaponTowards(AimDirection);
 	}
 	else
 	{
@@ -70,7 +76,7 @@ void UTankAimingComponent::AimAt(const FVector& HitLocation, float LaunchSpeed)
 	// If no solution found, do nothing
 }
 
-void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+void UTankAimingComponent::MoveWeaponTowards(FVector AimDirection)
 {
 	// Work out difference between current barrel rotation and AimDirection
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
@@ -78,8 +84,9 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
 
-	UE_LOG(LogTemp, Warning, TEXT("DeltaRotator: %f"), DeltaRotator.Pitch);
+	//UE_LOG(LogTemp, Warning, TEXT("DeltaRotator: %f"), DeltaRotator.Pitch);
 
 	Barrel->Elevate(DeltaRotator.Pitch);	
+	Turret->Rotate(DeltaRotator.Yaw);
 }
 
