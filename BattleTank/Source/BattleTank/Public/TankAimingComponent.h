@@ -31,7 +31,6 @@ private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 
-	// TODO include turret movement here
 	void MoveWeaponTowards(FVector AimDirection);
 	
 	

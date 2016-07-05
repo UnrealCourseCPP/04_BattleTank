@@ -19,13 +19,7 @@ public:
 	void Rotate(float RelativeSpeed);
 	
 private:
-	virtual void BeginPlay() override;
-	
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxDegreesPerSecond = 5.0f;
-
-	/*UPROPERTY(EditAnywhere, Category = Setup)
-	USceneComponent* AzimuthGimbal = nullptr;*/
-	
+		float MaxDegreesPerSecond = 25.0f;
 	
 };
