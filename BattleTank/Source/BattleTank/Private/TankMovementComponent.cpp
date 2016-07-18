@@ -6,21 +6,26 @@
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
-	if (!LeftTrackToSet || !RightTrackToSet) { return; }
-
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
-	//UE_LOG(LogTemp, Warning, TEXT("%f: %s IntendMoveForward throw: %f"), GetWorld()->GetTimeSeconds(), *GetName(), Throw);
+	if (!LeftTrack || !RightTrack) { return; }
+
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 
 	// TODO(spiros): Prevent double speed due to dual control
-
 }
 
+void UTankMovementComponent::IntendTurnRight(float Throw)
+{
+	if (!LeftTrack || !RightTrack) { return; }
+
+	LeftTrack->SetThrottle(Throw);
+	RightTrack->SetThrottle(-Throw);
+}
 
 
