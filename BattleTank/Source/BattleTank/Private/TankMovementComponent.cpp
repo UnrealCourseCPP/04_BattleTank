@@ -16,8 +16,7 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
-
-	// TODO(spiros): Prevent double speed due to dual control
+	
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw)
