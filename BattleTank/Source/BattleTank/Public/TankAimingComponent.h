@@ -5,6 +5,10 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
+// Forward Declaration
+class UTankBarrel; 
+class UTankTurret;
+
 // Enum for aiming state
 UENUM()
 enum class EFiringStatus :uint8
@@ -13,10 +17,6 @@ enum class EFiringStatus :uint8
 	Aiming,
 	Locked
 };
-
-// Forward Declaration
-class UTankBarrel; 
-class UTankTurret;
 
 // Component that aids in Aiming
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
