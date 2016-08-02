@@ -20,14 +20,16 @@ ATank::ATank()
 
 	//TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
 
+	UE_LOG(LogTemp, Warning, TEXT("DONKEY: Tank %s C++ CTOR running!"), *GetName());
 }
 
 // Called when the game starts or when spawned
-//void ATank::BeginPlay()
-//{
-//	Super::BeginPlay();
-//	
-//}
+void ATank::BeginPlay()
+{
+	UE_LOG(LogTemp, Warning, TEXT("DONKEY: Tank %s C++ BeginPlay() running!"), *GetName());  
+
+	Super::BeginPlay(); // Needed for BP BeginPlay to run!
+}
 
 // Called to bind functionality to input
 //void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
